@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+body {
+	background-color: #222222;
+}
+
+div.form-group {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+#result {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#result .col-xs-4 {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-top: 10px;
+}
+
+h1{
+	color:#41F25C;
+}
+a{
+	text-decoration:none;
+}
+a:hover{
+	text-decoration:none;
+	color:#41F25C;
+}
