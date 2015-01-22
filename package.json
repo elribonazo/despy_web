@@ -14,7 +14,7 @@
     "socket.io": "^1.1.0",
     "spotify": "^0.3.0",
     "spotify-data": "0.0.4",
-    "spotify-web": "^1.2.0",
+    "spotify-web": ">1.2.0",
     "spotify_m3": "^1.0.3"
   },
   "engines": {
