@@ -5,7 +5,7 @@ var Spotify = require('spotify-web');
 var ffmetadata = require("ffmetadata");
 var spotify_config = require('./config/spotify.json');
 var spotify_buscar = require('spotify');
-var puerto = process.env.PORT;
+var puerto = 8888;
 var spotify_username =spotify_config.login;
 var spotify_password =spotify_config.password;
 var app     = express();
@@ -25,23 +25,19 @@ var xmlplaylist;
 var downloadinfo = [];
 var totaldownloaded = 0;
 var spm3 = require('spotify_m3');
-
 rmdir('downloads/', function(error){
 	if(error) throw error;
 	fs.mkdirSync(__dirname + "/downloads");
 	console.log("Regenerating the downloads folder");
 	
 });
-
 console.log("Conectado puerto :" + puerto);
-
 if (debugMemoryUsage) {
 	setInterval(function () {
 		var mem = process.memoryUsage();
 		console.log(Math.round(mem.rss/1024/1024)+" MB RSS used | "+Math.round(mem.heapUsed/1024/1024)+" MB heap used | "+Math.round(mem.heapTotal/1024/1024)+" MB heap total | "+Math.round((mem.heapUsed/mem.heapTotal)*100)+"% of heap used");
 	}, 50000);
 }
-
 function playTrack(spotify,socket,downloadinfo) {
 
 	if(!clients[socket.id]){
@@ -231,7 +227,7 @@ app.use(function(req, res, next) {
 		auth = new Buffer(req.headers.authorization.substring(6), 'base64').toString().split(':');
 	}
 
-	if (!auth || auth[0] !== 'despy' || auth[1] !== '2014') {
+	if (!auth || auth[0] !== 'despy' || auth[1] !== '2015') {
 		// any of the tests failed
 		// send an Basic Auth request (HTTP Code: 401 Unauthorized)
 		res.statusCode = 401;
@@ -264,7 +260,7 @@ app.use(function(req, res, next) {
 
 
 app.get("*",function(req,res){
-	res.sendfile(__dirname + '/public'+req.path);
+	res.sendFile(__dirname + '/public'+req.path);
 });
 
 
@@ -420,8 +416,6 @@ io.on('connection', function (socket) {
 				try{
 					var uri = uris[socket.id][i[socket.id]];
 					var type = clients[socket.id].uriType(uri);
-
-
 					if (type === 'track') {
 						spotify.get(uri, function (err, track) {
 							if (err) {
